@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Exe2"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Seguros XPTO"
+        android:textSize="24sp"
+        android:layout_gravity="center"
+        android:padding="16dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Serviços"
+        android:layout_marginTop="8dp"
+        android:layout_marginHorizontal="8dp"
+        android:textSize="20sp"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        >
+
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="60dp"
+            android:text="Automoveis"
+            android:layout_marginRight="8dp"
+            android:backgroundTint="@color/gray"
+            app:cornerRadius="0dp" />
+            />
+
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="60dp"
+            android:backgroundTint="@color/gray"
+            android:text="imoveis"
+            app:cornerRadius="0dp" />
+        
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Novidades"
+        android:textSize="20sp"
+        android:layout_marginTop="8dp"
+        android:layout_marginHorizontal="8dp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="4dp"
+        android:text="Descontos de 5% ao assinar esse mês" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="24dp"
+        android:textSize="20sp"
+        android:text="Precisa de ajuda?" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Entre em contato"
+
+        />
+
+
+</LinearLayout>
