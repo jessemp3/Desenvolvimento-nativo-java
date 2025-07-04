@@ -22,6 +22,15 @@
         android:text="Hello World!" />
 
     <TextView
+        android:id="@+id/textViewEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:layout_gravity="start"
+        android:text="Hello World!"
+        />
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="8dp"
@@ -63,24 +72,24 @@
 
     </LinearLayout>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:autofillHints="emailAddress"
-        android:hint="Digite seu email"
-        android:inputType="textEmailAddress|textWebEmailAddress"
-        android:imeOptions="actionDone"
-        >
-<!--        o imeOptions é o icone que fic ano canto inferior do teclado , quando vc clica no input-->
-    </EditText>
+<!--    <EditText-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="8dp"-->
+<!--        android:autofillHints="emailAddress"-->
+<!--        android:hint="Digite seu email"-->
+<!--        android:inputType="textEmailAddress|textWebEmailAddress"-->
+<!--        android:imeOptions="actionDone"-->
+<!--        >-->
+<!--&lt;!&ndash;        o imeOptions é o icone que fic ano canto inferior do teclado , quando vc clica no input&ndash;&gt;-->
+<!--    </EditText>-->
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/button"
-        android:layout_gravity="center"
-        android:backgroundTint="@color/pink"
-        />
+<!--    <Button-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@string/button"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:backgroundTint="@color/pink"-->
+<!--        />-->
 
 </LinearLayout>

@@ -13,7 +13,7 @@
         android:theme="@style/Theme.LinearLayout"
         tools:targetApi="31">
         <activity
-            android:name=".Exe2Activity"
+            android:name=".Exe1Activity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-        <activity android:name=".Exe1Activity"/>
+        <activity android:name=".Exe2Activity"/>
 
         <meta-data
             android:name="preloaded_fonts"

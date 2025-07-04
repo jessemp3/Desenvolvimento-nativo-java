@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">LinearLayout</string>
     <string name="button">Clique Aqui</string>
+    <string name="login">login</string>
+    <string name="register">register</string>
+
 </resources>
