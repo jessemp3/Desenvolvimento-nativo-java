@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-        <activity android:name=".Exe2Activity"/>
+        <activity android:name=".Exe2Activity" />
 
         <meta-data
             android:name="preloaded_fonts"
