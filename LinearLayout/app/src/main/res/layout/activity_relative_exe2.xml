@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="16dp"
+    tools:context=".RelativeExe2Activity">
+
+    <TextView
+        android:id="@+id/textView_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Olá , nome e sobrenome"
+        />
+
+    <TextView
+        android:id="@+id/textView_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView_name"
+        android:text="O que vamos aprender hoje?"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:layout_marginTop="16dp"
+        />
+
+    <View
+        android:id="@+id/view_center"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"
+        />
+
+    <ImageView
+        android:id="@+id/image_development"
+        android:layout_width="128dp"
+        android:layout_height="160dp"
+        android:contentDescription="desenvolvimento "
+        android:src="@drawable/image_development"
+        android:layout_toStartOf="@id/view_center"
+        android:layout_below="@id/textView_title"
+        android:layout_marginTop="32dp"
+        android:layout_alignParentStart="true"
+        />
+
+    <ImageView
+        android:id="@+id/image_desing"
+        android:layout_width="128dp"
+        android:layout_height="160dp"
+        android:contentDescription="design"
+        android:src="@drawable/image_design"
+        android:layout_toEndOf="@id/view_center"
+        android:layout_below="@id/textView_title"
+        android:layout_marginTop="32dp"
+        android:layout_alignParentEnd="true"
+        />
+
+    <ImageView
+        android:id="@+id/image_ia"
+        android:layout_width="128dp"
+        android:layout_height="160dp"
+        android:contentDescription="inteligência artificial"
+        android:src="@drawable/image_ai"
+        android:layout_toStartOf="@id/view_center"
+        android:layout_below="@id/image_development"
+        android:layout_marginTop="32dp"
+        android:layout_alignParentStart="true"
+        />
+
+
+    <ImageView
+        android:id="@+id/image_explore"
+        android:layout_width="128dp"
+        android:layout_height="160dp"
+        android:contentDescription="explorar"
+        android:src="@drawable/image_explore"
+        android:layout_toEndOf="@id/view_center"
+        android:layout_below="@id/image_desing"
+        android:layout_marginTop="32dp"
+        android:layout_alignParentEnd="true"
+    />
+
+    <TextView
+        android:id="@+id/textView_popular_cousers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/image_ia"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="26dp"
+        android:textSize="20sp"
+        android:text="Cursos populares" />
+
+    <TextView
+        android:id="@+id/textView_see_alls"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/image_explore"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="32dp"
+        android:textStyle="bold"
+        android:text="Cursos populares" />
+
+    <View
+        android:id="@+id/view_gradient"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@drawable/ic_gradient"
+        android:layout_below="@id/textView_popular_cousers"
+        android:layout_marginTop="8dp"
+        />
+
+    <TextView
+        android:id="@+id/textView_android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView_popular_cousers"
+        android:layout_alignBottom="@id/view_gradient"
+        android:gravity="center_vertical"
+        android:layout_marginStart="16dp"
+        android:textColor="@color/white"
+        android:layout_alignTop="@id/view_gradient"
+        android:textStyle="bold"
+        android:text="Desenvolvimento Android" />
+
+    <ImageView
+        android:id="@+id/image_android"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_android"
+        android:layout_alignTop="@id/view_gradient"
+        android:layout_alignBottom="@id/view_gradient"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="16dp"
+        app:tint="@color/white" />
+
+</RelativeLayout>

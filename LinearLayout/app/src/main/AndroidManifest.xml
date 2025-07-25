@@ -13,6 +13,9 @@
         android:theme="@style/Theme.LinearLayout"
         tools:targetApi="31">
         <activity
+            android:name=".RelativeExe2Activity"
+            android:exported="false" />
+        <activity
             android:name=".RelativeExeActivity"
             android:exported="false" />
         <activity
