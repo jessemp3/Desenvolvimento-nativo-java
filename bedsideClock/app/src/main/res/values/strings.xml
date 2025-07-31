@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">bedsideClock</string>
+
+    <string name="label_battery_level">Nivel da Bateria</string>
+
+    <string name="desc_settings">Configurações</string>
+    <string name="desc_close_settings">fechar configurações</string>
 </resources>
