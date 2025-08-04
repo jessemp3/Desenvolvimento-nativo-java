@@ -53,10 +53,8 @@ public class MainActivity extends AppCompatActivity implements View
         });
         registerReceiver(batteryReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON); // flag de manter a tela ligada
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN); // essa flag toma a tela inteira e some com a barra de status
 
-
+        setFlags();
         setListeners();
     }
 
@@ -78,6 +76,13 @@ public class MainActivity extends AppCompatActivity implements View
         binding.imageViewSettings.setOnClickListener(this);
 
     }
+
+    private void setFlags(){
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON); // flag de manter a tela ligada
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN); // essa flag toma a tela inteira e some com a barra de status
+
+    }
+
     //broadcast
 
 
