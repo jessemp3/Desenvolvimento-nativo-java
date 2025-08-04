@@ -5,4 +5,8 @@
 
     <string name="desc_settings">Configurações</string>
     <string name="desc_close_settings">fechar configurações</string>
+    <string name="label_battery">%1$d%%</string>
+<!--    forma de fazer placeholder %[POSICAP][TIPO]-->
+<!--    &1$s-->
+<!--    duas porcetanges sinaliza que não é um placeholder , mas sim o simboldo de % mesmo-->
 </resources>

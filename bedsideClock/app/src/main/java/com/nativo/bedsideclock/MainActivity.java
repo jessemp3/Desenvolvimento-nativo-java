@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.BatteryManager;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -19,7 +20,9 @@ import com.nativo.bedsideclock.databinding.ActivityMainBinding;
 
 // 1 - bateria
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View
+
+        .OnClickListener {
 
     private ActivityMainBinding binding;
 
@@ -27,8 +30,12 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
-            binding.textViewBattery.setText(level + "%");
+            binding.textViewBattery.setText(getString(R.string.label_battery, level));
         }
+        // $d - inteiro
+        // $s - string
+        // $f - float/ double
+        // $b - boolean
     };
 
     @Override
@@ -49,7 +56,30 @@ public class MainActivity extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON); // flag de manter a tela ligada
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN); // essa flag toma a tela inteira e some com a barra de status
 
+
+        setListeners();
+    }
+
+    @Override
+    public void onClick(View v){
+        if(v.getId() == R.id.checkBox_battery) {
+            toggleBatteryLevel();
+        }
+    }
+
+    private void toggleBatteryLevel() {
+        boolean isVisible = binding.textViewBattery.getVisibility() == View.VISIBLE;
+        binding.textViewBattery.setVisibility(isVisible ? View.GONE : View.VISIBLE);
+    }
+
+    private void setListeners() {
+        binding.checkBoxBattery.setOnClickListener(this);
+        binding.imageViewClose.setOnClickListener(this);
+        binding.imageViewSettings.setOnClickListener(this);
+
     }
     //broadcast
+
+
 
 }
