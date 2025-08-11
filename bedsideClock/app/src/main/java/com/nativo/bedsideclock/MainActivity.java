@@ -32,9 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ActivityMainBinding binding;
     private Runnable runner;
 
-    /**
-     * Recebimento de evento de alteração de bateria
-     */
+
     private final BroadcastReceiver batteryReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -60,13 +58,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         registerReceiver(batteryReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 
-        // Eventos
         setListeners();
-
-        // Faz com que o elemento animado fique deslocado na actvitity e assim não visível
         hideOptions();
-
-        // Incializa a thread
         startBedside();
     }
 
@@ -88,9 +81,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    /**
-     * Adiciona flags de Tela cheia e para não bloquear a tela.
-     * */
+
     private void setFlags() {
         // Remove a barra superior
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -99,17 +90,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
 
-    /**
-     * Exibe as opções na interface do usuário, animando os componentes para a posição visível.
-     */
+
     private void showOptions() {
         binding.checkBoxBattery.animate().translationY(0).setDuration(400);
         binding.imageViewClose.animate().translationY(0).setDuration(400);
     }
 
-    /**
-     * Oculta as opções da interface do usuário, movendo os componentes para fora da tela.
-     */
+
     private void hideOptions() {
         int duration = 400;
 
@@ -154,26 +141,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
-    /**
-     * Mostra ou remove o nível da bateria
-     */
+
     private void toggleBatteryLevel() {
         boolean isVisible = binding.textViewBattery.getVisibility() == View.VISIBLE;
         binding.textViewBattery.setVisibility(isVisible ? View.GONE : View.VISIBLE);
     }
 
-    /**
-     * Eventos
-     */
+
     private void setListeners() {
         binding.checkBoxBattery.setOnClickListener(this);
         binding.imageViewSettings.setOnClickListener(this);
         binding.imageViewClose.setOnClickListener(this);
     }
 
-    /**
-     * Inicializa o relógio de cabeceira
-     */
     private void startBedside() {
         runner = new Runnable() {
             @Override
