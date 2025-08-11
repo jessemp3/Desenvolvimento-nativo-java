@@ -48,6 +48,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         EdgeToEdge.enable(this);
         setContentView(binding.getRoot());
 
+        hideSystemUI();
+
         ViewCompat.setOnApplyWindowInsetsListener(binding.main, (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -121,6 +123,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+
         // Aguarda a renderização dos componentes antes de calcular suas alturas e margens
         // Uso de lambda para simplificar escrita de classe anônima
         binding.imageViewClose.post(() -> {
@@ -145,6 +148,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void toggleBatteryLevel() {
         boolean isVisible = binding.textViewBattery.getVisibility() == View.VISIBLE;
         binding.textViewBattery.setVisibility(isVisible ? View.GONE : View.VISIBLE);
+    }
+
+    private void hideSystemUI() {
+        View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_IMMERSIVE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN
+        );
     }
 
 
