@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">bedsideClock</string>
     <string name="label_battery_level">Battery Level</string>
-    <string name="desc_settings">Settings</string>
+    <string name="desc_settings">settings</string>
     <string name="desc_close_settings">close settings</string>
     <string name="label_battery">%1$d%%</string>
 </resources>
