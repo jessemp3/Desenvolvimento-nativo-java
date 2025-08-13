@@ -8,10 +8,29 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/textView_a"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!"
+        android:textSize="22sp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/textView_b"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello b"
+        android:textSize="22sp"
+        app:layout_constraintTop_toBottomOf="@id/textView_a"
+        app:layout_constraintStart_toStartOf="@id/textView_a"
+        app:layout_constraintEnd_toEndOf="@id/textView_a"
+        />
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
