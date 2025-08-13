@@ -5,6 +5,114 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="16dp"
     tools:context=".Exe1_Acitivity">
+
+    <TextView
+        android:id="@+id/textView_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Olá nome e sobrenome"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="18sp"
+        android:layout_marginTop="16dp"
+        />
+
+    <TextView
+        android:id="@+id/textView_learning_today"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="o que vamos aprender hoje?"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView_name"
+        android:textSize="22sp"
+        android:layout_marginTop="16dp"
+        android:textStyle="bold"
+        />
+
+    <ImageView
+        android:id="@+id/imageView_development"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/image_development"
+        app:layout_constraintTop_toBottomOf="@id/textView_learning_today"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/imageView_desing"
+        android:contentDescription="cursos de programação"
+        android:layout_marginTop="32dp"
+        />
+
+    <ImageView
+        android:id="@+id/imageView_desing"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/image_design"
+        app:layout_constraintTop_toBottomOf="@id/textView_learning_today"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="cursos de programação"
+        app:layout_constraintStart_toEndOf="@id/imageView_development"
+        android:layout_marginTop="32dp"
+        />
+
+    <ImageView
+        android:id="@+id/imageView_ia"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/image_ai"
+        app:layout_constraintTop_toBottomOf="@id/imageView_development"
+        app:layout_constraintEnd_toStartOf="@id/imageView_explore"
+        app:layout_constraintStart_toStartOf="parent"
+        android:contentDescription="cursos de programação"
+        android:layout_marginTop="32dp"
+        />
+
+    <ImageView
+        android:id="@+id/imageView_explore"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/image_explore"
+        app:layout_constraintTop_toBottomOf="@id/imageView_desing"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imageView_ia"
+        android:contentDescription="cursos de programação"
+        android:layout_marginTop="32dp"
+        />
+
+    <TextView
+    android:id="@+id/textView_cours"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="cursos populares"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/imageView_ia"
+    android:textSize="22sp"
+    android:layout_marginTop="32dp"
+    android:textStyle="bold"
+    />
+
+    <TextView
+        android:id="@+id/textView_see_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ver todos "
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageView_ia"
+        android:textSize="18sp"
+        android:layout_marginTop="32dp"
+        />
+
+    <View
+        android:id="@+id/view_gradiente"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/ic_background"
+        app:layout_constraintTop_toBottomOf="@id/textView_cours"
+        android:layout_marginTop="18dp"
+        />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
