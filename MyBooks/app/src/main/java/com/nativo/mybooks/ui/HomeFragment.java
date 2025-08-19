@@ -1,4 +1,4 @@
-package com.nativo.mybooks.ui.home;
+package com.nativo.mybooks.ui;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.nativo.mybooks.databinding.FragmentHomeBinding;
+import com.nativo.mybooks.viewModel.HomeViewModel;
 
 public class HomeFragment extends Fragment {
 
@@ -18,15 +19,14 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel =
+        HomeViewModel ViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
 
         final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-        return root;
+        ViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        return binding.getRoot();
     }
 
     @Override
