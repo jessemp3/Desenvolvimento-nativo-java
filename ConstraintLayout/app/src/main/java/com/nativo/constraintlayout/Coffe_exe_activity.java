@@ -10,9 +10,15 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class Coffe_exe_activity extends AppCompatActivity {
 
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        int x= 12;
+        int y = 5;
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_coffe_exe);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
