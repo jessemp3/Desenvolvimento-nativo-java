@@ -10,11 +10,16 @@ import com.nativo.mybooks.repository.BookRepository;
 import java.util.List;
 
 public class HomeViewModel extends ViewModel {
-    private BookRepository bookRepository = new BookRepository();
+    private BookRepository bookRepository = BookRepository.getInstance();
     private final MutableLiveData<List<BookEntity>> _books = new MutableLiveData<>();
     public final MutableLiveData<List<BookEntity>> books = _books;
 
     public void getBooks() {
         _books.setValue(bookRepository.getBooks());
+    }
+
+    public void toggleFavoriteStatus(int id){
+        bookRepository.toggleFavoriteStatus(id);
+        getBooks();
     }
 }

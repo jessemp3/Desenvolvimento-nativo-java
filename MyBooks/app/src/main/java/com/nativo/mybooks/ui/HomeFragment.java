@@ -10,11 +10,15 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.nativo.mybooks.R;
 import com.nativo.mybooks.databinding.FragmentHomeBinding;
 import com.nativo.mybooks.entity.BookEntity;
 import com.nativo.mybooks.ui.adapter.BooksAdapter;
+import com.nativo.mybooks.ui.helper.BookConstance;
+import com.nativo.mybooks.ui.listener.BookListener;
 import com.nativo.mybooks.viewModel.HomeViewModel;
 
 import java.util.List;
@@ -23,7 +27,7 @@ public class HomeFragment extends Fragment {
     private HomeViewModel viewModel;
 
     private FragmentHomeBinding binding;
-    private BooksAdapter adapter = new BooksAdapter();
+    private final BooksAdapter adapter = new BooksAdapter();
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -38,6 +42,7 @@ public class HomeFragment extends Fragment {
 
 
         setObservers();
+        attachListeners();
         return binding.getRoot();
     }
 
@@ -54,5 +59,25 @@ public class HomeFragment extends Fragment {
                 adapter.updateBooks(bookEntities);
             }
         });
+    }
+
+    private void attachListeners() {
+        // callback com lambda
+        BookListener listener = new BookListener() {
+            @Override
+            public void onClick(int id) {
+                Bundle bundle = new Bundle();
+                bundle.putInt(BookConstance.BOOK_ID, id);
+
+                NavHostFragment.findNavController(HomeFragment.this)
+                        .navigate(R.id.navigation_details , bundle);
+            }
+
+            @Override
+            public void onFavoriteClick(int id) {
+                viewModel.toggleFavoriteStatus(id);
+            }
+        };
+        adapter.attachListeners(listener);
     }
 }

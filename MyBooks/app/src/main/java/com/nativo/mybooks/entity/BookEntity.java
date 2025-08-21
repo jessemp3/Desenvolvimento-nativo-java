@@ -4,7 +4,9 @@ public class BookEntity {
     private final int id;
     private final String title;
     private final String author;
-    private final boolean favorite;
+
+
+    private  boolean favorite;
     private final String  genre;
 
 
@@ -35,4 +37,9 @@ public class BookEntity {
     public boolean isFavorite() {
         return favorite;
     }
+
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
+    }
+
 }

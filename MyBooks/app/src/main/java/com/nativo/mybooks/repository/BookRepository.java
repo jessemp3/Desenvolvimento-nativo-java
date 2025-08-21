@@ -8,8 +8,22 @@ import java.util.List;
 public class BookRepository {
     private final List<BookEntity> books = new ArrayList<>();
 
-    public BookRepository() {
+
+    private static BookRepository instance;
+
+    private BookRepository() {
         books.addAll(getInitialBooks());
+    }
+
+    //padrão singleton
+    public static BookRepository getInstance() {
+        // o "synchronized" evita que duas threads acessem o método ao mesmo tempo
+       synchronized (BookRepository.class){
+            if(instance == null) {
+                instance = new BookRepository();
+            }
+        }
+        return instance;
     }
 
     private List<BookEntity> getInitialBooks() {
@@ -39,6 +53,37 @@ public class BookRepository {
 
     public List<BookEntity> getBooks() {
         return books;
+    }
+
+    public BookEntity getBookById(int id) {
+        BookEntity book = null;
+
+        for (BookEntity b : books) {
+            if (b.getId() == id) {
+                book = b;
+                break;
+            }
+        }
+        return book;
+    }
+
+    public void toggleFavoriteStatus(int id) {
+        for (BookEntity book : books) {
+            if (book.getId() == id) {
+                book.setFavorite(!book.isFavorite());
+                break;
+            }
+        }
+    }
+
+    public boolean delete(int id){
+        for (int i = 0; i < books.size(); i++) {
+            if(books.get(i).getId() == id){
+                books.remove(i);
+                return true;
+            }
+        }
+        return false;
     }
 
 }
