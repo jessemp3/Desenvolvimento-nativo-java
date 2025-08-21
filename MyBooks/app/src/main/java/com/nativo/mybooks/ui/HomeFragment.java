@@ -8,24 +8,36 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.nativo.mybooks.databinding.FragmentHomeBinding;
+import com.nativo.mybooks.entity.BookEntity;
+import com.nativo.mybooks.ui.adapter.BooksAdapter;
 import com.nativo.mybooks.viewModel.HomeViewModel;
 
+import java.util.List;
+
 public class HomeFragment extends Fragment {
+    private HomeViewModel viewModel;
 
     private FragmentHomeBinding binding;
+    private BooksAdapter adapter = new BooksAdapter();
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel ViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+       viewModel = new ViewModelProvider(this).get(HomeViewModel.class);
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
+        viewModel.getBooks();
 
-        final TextView textView = binding.textHome;
-        ViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        binding.reciclerViewBooks.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.reciclerViewBooks.setAdapter(adapter);
+
+
+        setObservers();
         return binding.getRoot();
     }
 
@@ -33,5 +45,14 @@ public class HomeFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    private void setObservers() {
+        viewModel.books.observe(getViewLifecycleOwner(), new Observer<List<BookEntity>>() {
+            @Override
+            public void onChanged(List<BookEntity> bookEntities) {
+                adapter.updateBooks(bookEntities);
+            }
+        });
     }
 }
