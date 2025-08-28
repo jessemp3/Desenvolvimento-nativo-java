@@ -19,32 +19,34 @@ public class BookDataBaseHelper extends
     private static final int VERSION = 1;
     private static final String NAME = "book_database";
 
+    String createBookTable = "CREATE TABLE " + DataBaseContance.Book.TABLE_NAME + " (" +
+            DataBaseContance.Book.Columns.ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            DataBaseContance.Book.Columns.TITLE + " TEXT NOT NULL, " +
+            DataBaseContance.Book.Columns.AUTHOR + " TEXT NOT NULL, " +
+            DataBaseContance.Book.Columns.GENRE + " TEXT NOT NULL, " +
+            DataBaseContance.Book.Columns.FAVORITE + " INTEGER NOT NULL );";
+
     public BookDataBaseHelper(Context context) {
         super(context, NAME, null, VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // scripts para a criação das tabelas / banco
-
-
-        String createBookTable = "CREATE TABLE " + DataBaseContance.Book.TABLE_NAME + " (" +
-                DataBaseContance.Book.Columns.ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                DataBaseContance.Book.Columns.TITLE + " TEXT NOT NULL, " +
-                DataBaseContance.Book.Columns.AUTHOR+ " TEXT NOT NULL, " +
-                DataBaseContance.Book.Columns.GENRE+ " TEXT NOT NULL, " +
-                DataBaseContance.Book.Columns.FAVORITE + "INTEGER NOT NULL );";
-
+        // Executa a criação da tabela no banco
         db.execSQL(createBookTable);
 
-
+        // Uma vez criada, executa a inserção da massa de dados
         insertBooks(db);
     }
 
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-        // scripts para atualização do banco
+        // Deleta a tabela e cria novamente (uma maneira de lidar com atualizações)
+        db.execSQL("DROP TABLE IF EXISTS " + DataBaseContance.Book.TABLE_NAME);
+
+        // Cria novamente usando o novo schema
+        onCreate(db);
     }
 
 
