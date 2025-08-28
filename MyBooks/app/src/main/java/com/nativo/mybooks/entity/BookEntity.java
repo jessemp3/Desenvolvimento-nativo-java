@@ -1,12 +1,22 @@
 package com.nativo.mybooks.entity;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "book")
 public class BookEntity {
+
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo
     private final int id;
+    @ColumnInfo
     private final String title;
+    @ColumnInfo
     private final String author;
-
-
+    @ColumnInfo
     private  boolean favorite;
+    @ColumnInfo
     private final String  genre;
 
 
