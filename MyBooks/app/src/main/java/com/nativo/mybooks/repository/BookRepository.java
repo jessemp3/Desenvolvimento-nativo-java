@@ -1,12 +1,8 @@
 package com.nativo.mybooks.repository;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 
 import com.nativo.mybooks.entity.BookEntity;
-import com.nativo.mybooks.ui.helper.DataBaseContance;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,12 +10,11 @@ import java.util.List;
 public class BookRepository {
     private static BookRepository instance;
 
-    private final BookDataBaseHelper dataBase;
+    private final BookDAO dataBase;
 
 
     private BookRepository(Context context) {
-        dataBase = new BookDataBaseHelper(context);
-        dataBase.getWritableDatabase();
+        dataBase = BookDataBase.getInstance(context).bookDAO();
     }
 
     //padrão singleton
@@ -35,154 +30,56 @@ public class BookRepository {
 
 
     public List<BookEntity> getBooks() {
-        List<BookEntity> books = new ArrayList<>();
-
-        // Obtém uma instância de leitura do banco de dados
-        SQLiteDatabase db = dataBase.getReadableDatabase();
-
-        // Query para selecionar todos os livros da tabela
-        Cursor cursor = db.query(
-                DataBaseContance.Book.TABLE_NAME,  // Nome da tabela
-                null,  // Seleciona todas as colunas
-                null,  // Sem filtro de linhas
-                null,  // Sem argumentos
-                null,  // Sem agrupamento
-                null,  // Sem filtro de ordenação
-                null   // Sem limite
-        );
-
-        // Verifica se o cursor contém algum dado e percorre todas as linhas
-        if (cursor.moveToFirst()) {
-            do {
-                int id = cursor.getInt(cursor.getColumnIndexOrThrow(DataBaseContance.Book.Columns.ID));
-                String title = cursor.getString(cursor.getColumnIndexOrThrow(DataBaseContance.Book.Columns.TITLE));
-                String author = cursor.getString(cursor.getColumnIndexOrThrow(DataBaseContance.Book.Columns.AUTHOR));
-                // Converte de volta para booleano
-                boolean fav = cursor.getInt(cursor.getColumnIndexOrThrow(DataBaseContance.Book.Columns.FAVORITE)) == 1;
-                String genre = cursor.getString(cursor.getColumnIndexOrThrow(DataBaseContance.Book.Columns.GENRE));
-
-                // Adiciona o livro à lista
-                books.add(new BookEntity(id, title, author, fav, genre));
-
-                // Continua enquanto houver mais registros
-            } while (cursor.moveToNext());
-        }
-
-        // Fecha o cursor e banco de dados após o uso
-        cursor.close();
-        db.close();
-
-        // Retorna a lista de livros
-        return books;
+       return dataBase.getBooks();
     }
 
     public List<BookEntity> getFavoriteBooks() {
-        List<BookEntity> books = new ArrayList<>();
-
-        // Obtém uma instância de leitura do banco de dados
-        SQLiteDatabase db = dataBase.getReadableDatabase();
-
-        // Query para selecionar todos os livros da tabela
-        Cursor cursor = db.query(
-                DataBaseContance.Book.TABLE_NAME,  // Nome da tabela
-                null,  // Seleciona todas as colunas
-                DataBaseContance.Book.Columns.FAVORITE + " = ?",
-                new String[]{"1"},
-                null,  // Sem agrupamento
-                null,  // Sem filtro de ordenação
-                null   // Sem limite
-        );
-
-        // Verifica se o cursor contém algum dado e percorre todas as linhas
-        if (cursor.moveToFirst()) {
-            do {
-                int id = cursor.getInt(cursor.getColumnIndexOrThrow(DataBaseContance.Book.Columns.ID));
-                String title = cursor.getString(cursor.getColumnIndexOrThrow(DataBaseContance.Book.Columns.TITLE));
-                String author = cursor.getString(cursor.getColumnIndexOrThrow(DataBaseContance.Book.Columns.AUTHOR));
-                // Converte de volta para booleano
-                boolean fav = cursor.getInt(cursor.getColumnIndexOrThrow(DataBaseContance.Book.Columns.FAVORITE)) == 1;
-                String genre = cursor.getString(cursor.getColumnIndexOrThrow(DataBaseContance.Book.Columns.GENRE));
-
-                // Adiciona o livro à lista
-                books.add(new BookEntity(id, title, author, fav, genre));
-
-                // Continua enquanto houver mais registros
-            } while (cursor.moveToNext());
-        }
-
-        // Fecha o cursor e banco de dados após o uso
-        cursor.close();
-        db.close();
-
-        // Retorna a lista de livros
-        return books;
-
+        return dataBase.getFavoriteBooks();
     }
 
     public BookEntity getBookById(int id) {
-        BookEntity book = null;
-
-        // Obtém uma instância de leitura do banco de dados
-        SQLiteDatabase db = dataBase.getReadableDatabase();
-
-        // Query para selecionar todos os livros da tabela
-        Cursor cursor = db.query(
-                DataBaseContance.Book.TABLE_NAME,  // Nome da tabela
-                null,  // Seleciona todas as colunas
-                DataBaseContance.Book.Columns.ID + " = ?",
-                new String[]{String.valueOf(id)},
-                null,  // Sem agrupamento
-                null,  // Sem filtro de ordenação
-                null   // Sem limite
-        );
-
-        // Verifica se o cursor contém algum dado e percorre todas as linhas
-        if (cursor.moveToFirst()) {
-            String title = cursor.getString(cursor.getColumnIndexOrThrow(DataBaseContance.Book.Columns.TITLE));
-            String author = cursor.getString(cursor.getColumnIndexOrThrow(DataBaseContance.Book.Columns.AUTHOR));
-            // Converte de volta para booleano
-            boolean fav = cursor.getInt(cursor.getColumnIndexOrThrow(DataBaseContance.Book.Columns.FAVORITE)) == 1;
-            String genre = cursor.getString(cursor.getColumnIndexOrThrow(DataBaseContance.Book.Columns.GENRE));
-
-            // Adiciona o livro à lista
-            book = new BookEntity(id, title, author, fav, genre);
-
-            // Continua enquanto houver mais registros
-        }
-
-        // Fecha o cursor e banco de dados após o uso
-        cursor.close();
-        db.close();
-
-        // Retorna a lista de livros
-        return book;
+        return dataBase.getBookById(id);
     }
 
     public void toggleFavoriteStatus(int id) {
         BookEntity book = getBookById(id);
-        SQLiteDatabase db = dataBase.getWritableDatabase();
-
-        int newFavoriteStatus = book.isFavorite() ? 0 : 1;
-
-        ContentValues values = new ContentValues();
-        values.put(DataBaseContance.Book.Columns.FAVORITE, newFavoriteStatus);
-
-
-        db.update(DataBaseContance.Book.TABLE_NAME,
-                values,
-                DataBaseContance.Book.Columns.ID + " = ?",
-                new String[]{String.valueOf(id)}
-                );
-
+        book.setFavorite(!book.isFavorite());
+        dataBase.update(book);
     }
 
     public boolean delete(int id) {
-        SQLiteDatabase db = dataBase.getWritableDatabase();
-
-        int rowsDeleted = db.delete(DataBaseContance.Book.TABLE_NAME,
-                DataBaseContance.Book.Columns.ID + " = ?",
-                new String[]{String.valueOf(id)});
-
-        return rowsDeleted > 0;
+       return dataBase.delete(getBookById(id)) > 0;
     }
+
+
+    public void loadInitialBooks() {
+        dataBase.create(getInitialBooks());
+    }
+
+    //a lista inicial de livros
+    private List<BookEntity> getInitialBooks() {
+        List<BookEntity> initialBooks = new ArrayList<>();
+        initialBooks.add(new BookEntity(1, "To Kill a Mockingbird", "Harper Lee", true, "Ficção"));
+        initialBooks.add(new BookEntity(2, "Dom Casmurro", "Machado de Assis", false, "Romance"));
+        initialBooks.add(new BookEntity(3, "O Hobbit", "J.R.R. Tolkien", true, "Fantasia"));
+        initialBooks.add(new BookEntity(4, "Cem Anos de Solidão", "Gabriel García Márquez", false, "Romance"));
+        initialBooks.add(new BookEntity(5, "O Pequeno Príncipe", "Antoine de Saint-Exupéry", false, "Fantasia"));
+        initialBooks.add(new BookEntity(6, "Crime e Castigo", "Fiódor Dostoiévski", false, "Ficção policial"));
+        initialBooks.add(new BookEntity(7, "Frankenstein", "Mary Shelley", false, "Terror"));
+        initialBooks.add(new BookEntity(8, "Harry Potter e a Pedra Filosofal", "J.K. Rowling", false, "Fantasia"));
+        initialBooks.add(new BookEntity(9, "Neuromancer", "William Gibson", false, "Cyberpunk"));
+        initialBooks.add(new BookEntity(10, "Senhor dos Anéis", "J.R.R. Tolkien", false, "Fantasia"));
+        initialBooks.add(new BookEntity(11, "Drácula", "Bram Stoker", false, "Terror"));
+        initialBooks.add(new BookEntity(12, "Orgulho e Preconceito", "Jane Austen", false, "Romance"));
+        initialBooks.add(new BookEntity(13, "Harry Potter e a Câmara Secreta", "J.K. Rowling", false, "Fantasia"));
+        initialBooks.add(new BookEntity(14, "As Crônicas de Nárnia", "C.S. Lewis", false, "Fantasia"));
+        initialBooks.add(new BookEntity(15, "O Código Da Vinci", "Dan Brown", false, "Mistério"));
+        initialBooks.add(new BookEntity(16, "It: A Coisa", "Stephen King", false, "Terror"));
+        initialBooks.add(new BookEntity(17, "Moby Dick", "Herman Melville", true, "Aventura"));
+        initialBooks.add(new BookEntity(18, "O Nome do Vento", "Patrick Rothfuss", true, "Fantasia"));
+        initialBooks.add(new BookEntity(19, "O Conde de Monte Cristo", "Alexandre Dumas", true, "Aventura"));
+        initialBooks.add(new BookEntity(20, "Os Miseráveis", "Victor Hugo", false, "Romance"));
+        return initialBooks;
+    }
+
 }
