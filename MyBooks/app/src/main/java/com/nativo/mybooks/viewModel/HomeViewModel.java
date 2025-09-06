@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.nativo.mybooks.callBack.CallBack;
 import com.nativo.mybooks.entity.BookEntity;
 import com.nativo.mybooks.repository.BookRepository;
 
@@ -22,13 +23,23 @@ public class HomeViewModel extends AndroidViewModel {
         super(application);
 
 
-        if(bookRepository.getBooks().isEmpty()){
-            bookRepository.loadInitialBooks();
-        }
+        bookRepository.getBooks(new CallBack<List<BookEntity>>() {
+            @Override
+            public void onSuccess(List<BookEntity> result) {
+                if (result.isEmpty()){
+                    bookRepository.loadInitialBooks();
+                }
+            }
+        });
     }
 
     public void getBooks() {
-        _books.setValue(bookRepository.getBooks());
+        bookRepository.getBooks(new CallBack<List<BookEntity>>() {
+            @Override
+            public void onSuccess(List<BookEntity> result) {
+                _books.postValue(result);
+            }
+        });
     }
 
     public void toggleFavoriteStatus(int id){
