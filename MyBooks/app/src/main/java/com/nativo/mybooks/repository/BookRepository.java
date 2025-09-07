@@ -56,13 +56,17 @@ public class BookRepository {
         });
     }
 
-    public void toggleFavoriteStatus(int id) {
+    public void toggleFavoriteStatus(int id , CallBack<Void> callBack) {
+
+
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
                 BookEntity book = dataBase.getBookById(id);
                 book.setFavorite(!book.isFavorite());
                 dataBase.update(book);
+
+                callBack.onSuccess(null);
             }
         });
     }

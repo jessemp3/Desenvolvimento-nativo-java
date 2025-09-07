@@ -34,7 +34,12 @@ public class DetailsViewModel extends AndroidViewModel {
     }
 
     public void toggleFavoriteStatus(int id) {
-        bookRepository.toggleFavoriteStatus(id);
+        bookRepository.toggleFavoriteStatus(id, new CallBack<Void>() {
+            @Override
+            public void onSuccess(Void result) {
+
+            }
+        });
     }
 
     public void delete(int id){

@@ -34,7 +34,11 @@ public class FavoriteViewModel extends AndroidViewModel {
     }
 
     public void toggleFavoriteStatus(int id){
-        bookRepository.toggleFavoriteStatus(id);
-        getBooks();
+        bookRepository.toggleFavoriteStatus(id, new CallBack<Void>() {
+            @Override
+            public void onSuccess(Void result) {
+                getBooks();
+            }
+        });
     }
 }
