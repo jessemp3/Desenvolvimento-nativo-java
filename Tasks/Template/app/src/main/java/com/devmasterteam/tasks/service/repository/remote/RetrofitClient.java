@@ -14,12 +14,16 @@ public class RetrofitClient {
         synchronized (RetrofitClient.class) {
             if (instance == null) {
                 instance = new retrofit2.Retrofit.Builder()
-                        .baseUrl("https://www.devmasterteam.com/CursoAndroidAPI/")
+                        .baseUrl("https://www.devmasterteam.com/CursoAndroidAPI")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
             }
         }
         return instance;
+    }
+
+    public static <S> S createService(Class<S> service) {
+       return getInstance().create(service);
     }
 
 }
